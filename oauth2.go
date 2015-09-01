@@ -5,7 +5,7 @@
 // Package oauth2 provides support for making
 // OAuth2 authorized and authenticated HTTP requests.
 // It can additionally grant authorization with Bearer JWT.
-package oauth2 // import "golang.org/x/oauth2"
+package oauth2 // import "github.com/hoonmin/oauth2"
 
 import (
 	"bytes"
@@ -15,8 +15,8 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/hoonmin/oauth2/internal"
 	"golang.org/x/net/context"
-	"golang.org/x/oauth2/internal"
 )
 
 // NoContext is the default context you should supply if not using
@@ -57,8 +57,9 @@ type TokenSource interface {
 // Endpoint contains the OAuth 2.0 provider's authorization and token
 // endpoint URLs.
 type Endpoint struct {
-	AuthURL  string
-	TokenURL string
+	AuthURL            string
+	TokenURL           string
+	ClientSecretInBody bool
 }
 
 var (

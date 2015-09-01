@@ -135,13 +135,13 @@ func providerAuthHeaderWorks(tokenURL string) bool {
 	return true
 }
 
-func RetrieveToken(ctx context.Context, ClientID, ClientSecret, TokenURL string, v url.Values) (*Token, error) {
+func RetrieveToken(ctx context.Context, ClientID, ClientSecret, TokenURL string, ClientSecretInBody bool, v url.Values) (*Token, error) {
 	hc, err := ContextClient(ctx)
 	if err != nil {
 		return nil, err
 	}
 	v.Set("client_id", ClientID)
-	bustedAuth := !providerAuthHeaderWorks(TokenURL)
+	bustedAuth := !providerAuthHeaderWorks(TokenURL) || ClientSecretInBody
 	if bustedAuth && ClientSecret != "" {
 		v.Set("client_secret", ClientSecret)
 	}

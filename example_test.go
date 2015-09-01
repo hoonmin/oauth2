@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"log"
 
-	"golang.org/x/oauth2"
+	"github.com/hoonmin/oauth2"
 )
 
 func ExampleConfig() {

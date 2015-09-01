@@ -11,16 +11,16 @@
 // server.
 //
 // See http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4
-package clientcredentials // import "golang.org/x/oauth2/clientcredentials"
+package clientcredentials // import "github.com/hoonmin/oauth2/clientcredentials"
 
 import (
 	"net/http"
 	"net/url"
 	"strings"
 
+	"github.com/hoonmin/oauth2"
+	"github.com/hoonmin/oauth2/internal"
 	"golang.org/x/net/context"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/internal"
 )
 
 // tokenFromInternal maps an *internal.Token struct into
@@ -42,7 +42,7 @@ func tokenFromInternal(t *internal.Token) *oauth2.Token {
 // This token is then mapped from *internal.Token into an *oauth2.Token which is
 // returned along with an error.
 func retrieveToken(ctx context.Context, c *Config, v url.Values) (*oauth2.Token, error) {
-	tk, err := internal.RetrieveToken(ctx, c.ClientID, c.ClientSecret, c.TokenURL, v)
+	tk, err := internal.RetrieveToken(ctx, c.ClientID, c.ClientSecret, c.TokenURL, c.Endpoint.ClientSecretInBody, v)
 	if err != nil {
 		return nil, err
 	}
